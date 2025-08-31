@@ -1,0 +1,14 @@
+{
+    "name": "ReelingIt",
+    "short_name": "ReelingIt",
+    "theme_color": "#43281C",
+    "display": "browser",
+    "background_color": "#56bce8",
+    "description": "The ultimate app for movie lovers: discover trailers, reviews, showtimes, and more. Experience cinema like never before!",    "icons": [
+        {
+            "src": "images/icon.png",
+            "sizes": "1024x1024",
+            "type": "image/png"
+        }
+    ]
+}

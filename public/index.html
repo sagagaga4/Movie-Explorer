@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$agFLIX!</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="manifest" href="/app.webmanifest">
+    <link rel="icon" href="/images/icon2.png">
+    <script src="/app.js" type="module" defer></script>
+    <base href="/">
+</head>
+<body>
+    <header>
+        <h1><img src="images/sagFLIX.png" height="35" alt="MovieSite"></h1>
+        <nav>   
+            <ul>
+                <li><a class="navlink" href="/">Movies</a></li>
+                <li><a class="navlink" href="/account/favorites">Favorites</a></li>
+                <li><a class="navlink" href="/account/watchlist">watchlist</a></li>
+                <li><a class="navlink" href="/account/">My Account</a></li>            
+            </ul>
+        </nav>
+        <div>
+            <form onsubmit="app.search(event)">
+                <input id="search-input" type="search" placeholder="Search movies">
+            </form>    
+        </div>
+    </header>
+    <main>
+        <animated-loading data-elements="5" test="something"
+            data-width="100px" data-height="150px">
+        </animated-loading>
+    </main>
+
+    <dialog id="alert-modal">
+        <h3>Error</h3>
+        <p>There was an error loading the page</p>
+        <button onclick="app.closeError()">OK</button>
+    </dialog>
+
+    <!-- Templates -->
+
+     <template id="template-home">
+        <section class="vertical-scroll" id="top-10">
+            <h2>This Week's Top Movies</h2>
+            <ul></ul>
+        </section>
+        <section class="vertical-scroll" id="random">
+            <h2>Just pick something random</h2>
+            <ul></ul>
+        </section>
+        </template>
+
+        <template id="template-movie-details">
+        <article id="movie">
+            <h2><animated-loading elements="2"></animated-loading></h2>
+            <h3></h3>
+            <header>
+                <img src="" alt="Poster">
+                <youtube-embed id="trailer" data-url="">YouTube loading...</youtube-embed>
+                <section id="actions">
+                    <dl id="metadata">
+                    </dl>
+                    <button>Add to Favorites</button>
+                    <button>Add to Watchlist</button>    
+                </section>
+            </header>
+            <ul id="genres"></ul>
+            <p id="overview"></p>
+            <ul id="cast"></ul>
+        </article>
+    </template>
+
+<template id="template-movies">
+        <section>
+            <div id="search-header">
+                <h2></h2>
+                <section id="filters">
+                    <select id="filter" onchange="app.searchFilterChange(this.value)">
+                        <option>Filter by Genre</option>                        
+                    </select>
+                    <select id="order" onchange="app.searchOrderChange(this.value)">
+                        <option value="popularity">Sort by Popularity</option>
+                        <option value="score">Sort by Score</option>
+                        <option value="date">Sort by Release Date</option>
+                        <option value="name">Sort by Name</option>
+                    </select>
+                </section>
+            </div>
+            <ul id="movies-result">
+                <animated-loading data-elements="5"
+                    data-width="150px" data-height="220px">
+                </animated-loading> 
+            </ul>
+        </section>
+    </template> 
+    <template id="template-register">
+        <section>
+            <h2>Register a New Account</h2>
+            <form onsubmit="app.register(event)">
+                <label for="register-name">Name</label>
+                <input id="register-name" type="text" placeholder="Enter your name" required autocomplete="name">
+            
+                <label for="register-email">E-mail</label>
+                <input id="register-email" required type ="email" placeholder="Enter your email"  autocomplete="email">
+
+                <label for="register-password">Password</label>
+                <input id="register-password"  type="password" autocomplete="new-password">
+
+                <label for="register-password-confirm">Confirm Password</label>
+                <input id="register-password-confirm" required type="password">
+
+                <button>Register</button>
+                <p>If you already have an acount, please <a href="/account/login">log in</a>.</p>
+            </form>
+        </section></p>
+    </template>
+
+    <template id="template-login">
+        <section>
+            <h2>Login to your Account</h2>
+            <form onsubmit="app.login(event)">
+                <label for="login-email">E-mail</label>
+                <input id="login-email" required type ="email" placeholder="Enter your email"  autocomplete="email">
+
+                <label for="login-password">Password</label>
+                <input id="login-password" type="password" autocomplete="current-password">
+                <button>Log In</button>
+                <p>If you don't have an acount, please <a href="/account/register">register</a>.</p>
+            </form>
+        </section>
+    </template>
+    
+    <template id="template-account">
+        <section id="account">
+            <h2>You are Logged In</h2>
+            <button onclick="app.logout()">Log out</button>
+            <button onclick="app.Router.go('/account/favorites')">Your Favorites</button>
+            <button onclick="app.Router.go('/account/watchlist')">Your Watchlist</button>
+        </section>
+    </template>       
+
+    <footer>
+        <p>(C) MovieSite Sagi's Projects 2025</p>
+    </footer>
+</body>
+</html>

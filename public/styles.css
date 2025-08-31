@@ -1,0 +1,505 @@
+:root {
+    --background-surface: #000000;
+    --primaryColor: #131212;
+    --secondaryColor: #dde0da;
+    --textColor: #f4f1e5;
+    --highlightColor: #ffd94e;
+    --color5: #ffea48;
+    --color6: #f8d769;
+    --highlight2: #2d2c29;
+}
+
+@view-transition {
+    navigation: auto;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+}
+
+body {
+    /* Hide vertical scrollbar but keep scroll functionality */
+    overflow-y: scroll; /* Ensure scrolling still works */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    background: black;
+    color: #fff;
+}
+
+body::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+a {
+    text-decoration: none;
+    color: var(--textColor);
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #151515;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.682);
+}
+
+header p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--highlightColor);
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 1.5rem;
+}
+
+nav a {
+    font-weight: bold;
+    color: var(--textColor);
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+nav a:hover {
+    color: var(--highlightColor);
+}
+
+header div {
+    display: flex;
+    gap: 1rem;
+}
+
+input[type=search] {
+    padding: 0.5rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #272525;
+    color: #f4f1e5;
+}
+
+input[type=search]::placeholder {
+    color:#f4f1e5;
+}
+
+/* Main Content */
+main {
+    padding: 2rem;
+}
+
+section {
+    margin-bottom: 2rem;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--secondaryColor);
+}
+
+h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--secondaryColor);
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+/* Movie Lists */
+.vertical-scroll ul {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+    list-style: none;
+    scrollbar-width: none; /* Firefox */
+    scrollbar-color: rgba(100, 100, 100, 0.5) var(--primaryColor); /* Firefox: thumb color, track color */
+}
+
+.vertical-scroll ul::-webkit-scrollbar {
+    display: none;              /* Chrome, Safari */
+}
+/* WebKit browsers (Chrome, Safari) */
+.vertical-scroll ul::-webkit-scrollbar {
+    height: 8px; /* Use height for horizontal scrollbar */
+}
+
+.vertical-scroll ul::-webkit-scrollbar-track {
+    background: var(--primaryColor); /* Match your theme */
+    border-radius: 4px;
+}
+
+.vertical-scroll ul::-webkit-scrollbar-thumb {
+    background-color: rgba(100, 100, 100, 0.5); /* Semi-transparent gray */
+    border-radius: 4px;
+}
+
+.vertical-scroll ul::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(150, 150, 150, 0.7); /* Lighter on hover */
+}
+
+.vertical-scroll li {
+    flex: 0 0 auto;
+    width: 150px;
+    text-align: center;
+}
+
+movie-item {
+    width: 150px;
+    display: block;
+}
+
+movie-item img {
+    width: 100%;
+    height: 220px;
+    background: linear-gradient(
+        90deg,
+        #555 0%,
+        #666 50%,
+        #555 100%
+    );
+    background-size: 200% 100%;
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
+    animation: loading-wave 1.5s infinite ease-in-out;
+}
+
+movie-item {
+    text-align: center;
+}
+
+#movies-result {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* Waving Effect Animation */
+.loading-wave {
+    background: linear-gradient(
+        90deg,
+        #555 0%,
+        #999 50%,
+        #555 100%
+    );
+    background-size: 200% 100%;
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
+    animation: loading-wave 1.5s infinite ease-in-out;
+}
+
+
+@keyframes loading-wave {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 200% 50%;
+    }
+}
+
+.vertical-scroll  p {
+    font-size: 0.9rem;
+    color: var(--textColor);
+}
+
+.vertical-scroll img:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+#search-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;   
+    background-color:black; 
+}
+
+#filters {
+    justify-content: flex-end; 
+    gap: 1rem;
+    align-items: center;     
+}
+
+select {
+    padding: 5px;
+    border: 2px solid var(--color6);
+    border-radius: 10px;
+    color: #dde0da;
+    background-color: #272525;
+    margin-right: 10px;
+}
+
+dl {
+    margin: 10%;
+    padding: 0;
+    width: 80%;
+}
+
+dt {
+    font-size: 0.5em;
+    margin-top: 10px;
+    color: var(--secondaryColor);
+}
+
+dd {
+    font-size: 1em;
+    color: var(--textColor);    
+}
+
+/* Footer */
+footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.682);
+    padding: 2rem;
+    background-color: #020202ca;  
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+footer p {
+    align-items: left;
+    font-size: 0.9rem;
+    color: #ffd94ebe;
+}
+
+/* Modal Styles */
+dialog {
+    background-color: var(--background-surface);
+    color: var(--textColor);
+    border: var(--highlightColor) solid 1px;
+    border-radius: 10px;
+    padding: 1.5rem;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+}
+
+dialog h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+dialog p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+dialog button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+dialog .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    color: var(--highlight2);
+    font-size: 1.2rem;
+}
+
+dialog .action-btn {
+    background-color: var(--color6);
+    color: var(--primaryColor);
+    margin-right: 1rem;
+}
+
+dialog .cancel-btn {
+    background-color: #555;
+    color: #fff;
+}
+
+dialog button:hover {
+    opacity: 0.9;
+}
+
+
+/* Buttons to trigger modals */
+button {
+    padding: 0.5rem 1rem;
+    background-color: var(--color6);
+    color: var(--primaryColor);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0.5rem;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+
+/* Movie Details */
+#movie h3 {
+    font-weight: normal;
+    margin-top: -10px;
+    font-size: 1.1em;
+}
+
+#movie header {
+    border-radius: 10px;
+}
+
+#movie header img {
+    height: 300px;
+}
+
+#movie #genres {
+    display: flex;
+    margin-top: 10px;
+}
+
+#movie header {
+    display: flex;
+    gap: 10px;
+}
+
+#movie header #actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+#movie header #actions button {
+    width: 170px;
+}
+
+#movie #trailer {
+    flex: 3;
+    margin-top: 4px;
+}
+
+#movie #genres li {
+    background-color: var(--primaryColor);
+    padding: 10px;
+    margin: 10px 10px 10px 0;
+    font-size: 0.7em;
+    border-radius: 10px;
+    color: var(--textColor);
+}
+
+#movie #overview {
+    background-color: var(--primaryColor);
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 10px;
+    color: var(--textColor)
+}
+
+#movie #cast {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    margin: 20px;
+}
+
+#movie #cast li {
+    width: 300px;
+    background-color: var(--primaryColor);
+    margin: 10px 0;
+    border-radius: 10px;
+    display: flex;
+    gap: 10px;
+    align-items: center; 
+}
+
+#movie #cast p {
+    color: var(--textColor)    
+}
+
+#movie #cast img {
+    height: 100px;
+    width: 66px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+label {
+    display: block;
+    color:var(--textColor);
+}
+
+form {
+    background-color: #151515;
+    padding: 20px;
+    border-radius: 20px;
+    margin: auto;
+    
+}
+
+form p {
+    color: var(--secondaryColor);
+    margin-top: 20px;
+}
+
+#account dl {
+    margin: 20px 0;
+
+}
+
+#account dt {
+    font-size: 1em;;
+}
+
+input[type=text],input[type=password],input[type=email] {
+    display: block;
+    margin: 5px 0 20px 0;
+    padding: 10px;
+    min-width: 250px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    nav ul {
+        gap: 1rem;
+    }
+
+    header div {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    header input {
+        width: 70%;
+    }
+
+    footer {
+        flex-direction: column;
+        align-items: right
+    }
+
+    input[type=search] {
+        margin: auto;
+    }
+
+    
+}

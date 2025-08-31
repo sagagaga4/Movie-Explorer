@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="479" height="109" viewBox="0 0 479 109">
+  <defs>
+    <linearGradient id="linear-gradient" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#0ac189"/>
+      <stop offset="1" stop-color="#8dc1e7"/>
+    </linearGradient>
+    <clipPath id="clip-Logo">
+      <rect width="479" height="109"/>
+    </clipPath>
+  </defs>
+  <g id="Logo" clip-path="url(#clip-Logo)">
+    <g id="Group_44" data-name="Group 44" transform="translate(2850 2757)">
+      <path id="Subtraction_3" data-name="Subtraction 3" d="M99,58H0V0H99V4H95V8h4V4.552L99,12H71V46H99v4H95v4h4v4ZM87,50v4h4V50Zm-8,0v4h4V50Zm-8,0v4h4V50Zm-8,0v4h4V50Zm-8,0v4h4V50Zm-8,0v4h4V50Zm-8,0v4h4V50Zm-8,0v4h4V50Zm-8,0v4h4V50ZM39,12V46H67V12ZM7,12V46H35V12ZM87,4V8h4V4ZM79,4V8h4V4ZM71,4V8h4V4ZM63,4V8h4V4ZM55,4V8h4V4ZM47,4V8h4V4ZM39,4V8h4V4ZM31,4V8h4V4ZM23,4V8h4V4Z" transform="translate(-2850 -2729)" fill="url(#linear-gradient)"/>
+      <text id="ReelingIt" transform="translate(-2751 -2671)" fill="#e1e1e1" font-size="80" font-family="OpenSans, Open Sans" letter-spacing="0.08em"><tspan x="0" y="0">Reeling</tspan><tspan y="0" fill="#0dc8f5" font-family="OpenSans-Semibold, Open Sans" font-weight="600">It</tspan></text>
+    </g>
+  </g>
+</svg>

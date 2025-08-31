@@ -1,5 +1,6 @@
 # 🎬 Movies Explorer  
-*A high-performance fullstack movie app built with Go & Vanilla JavaScript*  
+*A high-performance fullstack movie app built with Go & Vanilla Java![Uploading Screenshot 2025-08-31 at 21.17.33.png…]()
+Script*  
 
 ## 🌟 Overview  
 Movies Explorer is a fullstack web application that allows users to browse, search, and filter movies with a modern, smooth user experience.  

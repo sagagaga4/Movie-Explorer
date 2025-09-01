@@ -105,16 +105,16 @@ func (h *AccountHandler) Authenticate(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Authenticate the user
-	success, err := h.storage.Authenticate(req.Email, req.Password)
+	user, err := h.storage.Authenticate(req.Email, req.Password)
 	if h.handleStorageError(w, err, "Failed to authenticate user") {
 		return
 	}
 
 	// Return success response
 	response := AuthResponse{
-		Success: success,
+		Success: true,
 		Message: "User registered successfully",
-		JWT:     token.CreateJWT(models.User{Email: req.Email}, *h.logger),
+		JWT:     token.CreateJWT(*user, *h.logger),
 	}
 
 	if err := h.writeJSONResponse(w, response); err == nil {

@@ -99,7 +99,7 @@
         <section>
             <h2>Register a New Account</h2>
             <form onsubmit="app.register(event)">
-                <label for="register-name">Name</label>
+                <label for="register-name">Full-Name</label>
                 <input id="register-name" type="text" placeholder="Enter your name" required autocomplete="name">
             
                 <label for="register-email">E-mail</label>
@@ -112,7 +112,7 @@
                 <input id="register-password-confirm" required type="password">
 
                 <button>Register</button>
-                <p>If you already have an acount, please <a href="/account/login">log in</a>.</p>
+                <p>If you already have an acount, please <a href="/account/login" style="font-weight: bold;text-decoration: underline; color: orange">login</a>.</p>
             </form>
         </section></p>
     </template>
@@ -127,7 +127,7 @@
                 <label for="login-password">Password</label>
                 <input id="login-password" type="password" autocomplete="current-password">
                 <button>Log In</button>
-                <p>If you don't have an acount, please <a href="/account/register">register</a>.</p>
+                <p>If you don't have an acount, please <a href="/account/register" style="font-weight: bold;text-decoration: underline; color: orange">register</a>.</p>
             </form>
         </section>
     </template>

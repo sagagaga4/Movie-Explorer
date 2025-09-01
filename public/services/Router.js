@@ -29,28 +29,26 @@ export const Router = {
         for (const r of routes) {
             if (typeof r.path === "string" && r.path === routePath) {
                 pageElement = new r.component();
+                needLogin = r.loggedIn === true   
                 break;
             } else if (r.path instanceof RegExp) {
                 const match = r.path.exec(route);
                 if (match) {
                     const params = match.slice(1);
                     pageElement = new r.component();
-                    pageElement.params = params;                    
+                    pageElement.params = params;  
+                    needLogin = r.loggedIn === true                  
                     break;
                 }
             }
-            needLogin = r.loggedIn == true
         }
 
         if(pageElement){
-            if(needLogin && app.Store.loggedIn == false){
-                app.Router.go("/account/go")
+            if(needLogin && !app.Store.loggedIn){
+                app.Router.go("/account/login")
                 return;
             }
-
         }
-
-
 
         if (pageElement==null) {
             pageElement = document.createElement("h1");

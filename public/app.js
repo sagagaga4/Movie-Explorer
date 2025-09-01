@@ -61,27 +61,31 @@ window.app ={
         if(errors.length == 0){
             const response = await API.register(name,email,password);
             if(response.success){
-                app.Store.jwt = response.token;
-                app.Router.go("/accounts/")
+                app.showError(response.message, false)
+                setTimeout(()=> {
+                    app.closeError();
+                    app.Router.go("/account/login");
+                },  2000);
             } else {
                 app.showError(response.message, false);
             }        
         } else {
-            app.showError(errors.join(". "), false);
+            app.showError(errors.join(" "), false);
         }
     },
     login: async (event) => {  
-        event.preventDefault();
-        let errors = []; 
-        const email = document.getElementById("login-email").value;
-        const password = document.getElementById("login-password").value
+        if (event) event.preventDefault();
+        const loginEmail = document.getElementById("login-email").value;
+        const loginPassword = document.getElementById("login-password").value
         //Error handeling
-        if(email.length < 7) errors.push("Enter a valid email.");
-        if(password.length < 4) errors.push("Enter a valid password.");
+        const errors = []; 
+        if(!loginEmail ||loginEmail.length < 7) errors.push("Enter a valid email.");
+        if(!loginPassword||loginPassword.length < 4) errors.push("Enter a valid password.");
+        
         if(errors.length == 0){
-            const response = await API.authenticate(email,password);
+            const response = await API.authenticate(loginEmail,loginPassword);
             if(response.success){
-                app.Store.jwt = response.token;
+                app.Store.jwt = response.jwt;
                 app.Router.go("/account/")
             } else {
                 app.showError(response.message, false);

@@ -1,5 +1,4 @@
 import { HomePage } from "./components/HomePage.js";
-import { API } from "./services/API.js"
 import './components/AnimatedLoading.js'
 import { MovieDetailsPage } from "./components/MovieDetailsPage.js";
 import './components/YoutubeEmbed.js'
@@ -8,6 +7,9 @@ import { MoviesPage} from "./components/MoviesPage.js";
 import { RegisterPage } from "./components/RegisterPage.js";
 import { LoginPage } from "./components/LoginPage.js";
 import Store from "./services/Store.js";
+import FavoritePage  from "./components/FavoritePage.js";
+import WatchlistPage from "./components/WatchlistPage.js";
+import { API } from "./services/API.js";
 
 window.addEventListener("DOMContentLoaded", event =>    {
     app.Router.init();
@@ -20,6 +22,7 @@ window.addEventListener('error', (event) => {
 window.app ={
     Router,
     Store,
+    API,
     showError: (message = "Something went wrong",goToHome=false) => {
         document.getElementById("alert-modal").showModal();
         document.querySelector("#alert-modal p").textContent = message;
@@ -32,7 +35,6 @@ window.app ={
         event.preventDefault();
         const q = document.querySelector("input[type=search]").value;
         app.Router.go("/movies?q=" + q);
-    
     },
     searchOrderChange: (order) => {
         const urlParams = new URLSearchParams(window.location.search);
@@ -58,7 +60,8 @@ window.app ={
         if(email.length < 7) errors.push("Enter a valid email.");
         if(password.length < 4) errors.push("Enter a valid password.");
         if(password != passwordConfirm) errors.push("Passwords do not match (tpesh).");
-        if(errors.length == 0){
+        if(errors.length == 0)
+        {
             const response = await API.register(name,email,password);
             if(response.success){
                 app.showError(response.message, false)
@@ -77,13 +80,14 @@ window.app ={
         if (event) event.preventDefault();
         const loginEmail = document.getElementById("login-email").value;
         const loginPassword = document.getElementById("login-password").value
+        
         //Error handeling
         const errors = []; 
         if(!loginEmail ||loginEmail.length < 7) errors.push("Enter a valid email.");
         if(!loginPassword||loginPassword.length < 4) errors.push("Enter a valid password.");
         
         if(errors.length == 0){
-            const response = await API.authenticate(loginEmail,loginPassword);
+            const response = await API.login(loginEmail,loginPassword);
             if(response.success){
                 app.Store.jwt = response.jwt;
                 app.Router.go("/account/")
@@ -94,10 +98,32 @@ window.app ={
             app.showError(errors.join(". "), false);
         }
     },
+    saveToCollection: async (movie_id, collection) => {
+        if (app.Store.loggedIn) {
+            try {
+                const response = await API.saveToCollection(movie_id, collection);
+                if (response.success) {
+                    switch(collection) {
+                        case "favorite":
+                            app.Router.go("/account/favorites")
+                        break;
+                        case "watchlist":
+                            app.Router.go("/account/watchlist")
+                    }
+                } else {
+                    app.showError("We couldn't save the movie.")
+                }
+            } catch (e) {
+                console.log(e)
+            }
+        } else {
+            app.Router.go("/account/");
+        }
+    },
+    
     //Removing user jwt storage and returning to home address
     logout: () => {
-        Store.jwt = null;
+        app.Store.jwt = null;
         app.Router.go("/");
-    },
-    api : API
+    }
 }

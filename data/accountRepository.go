@@ -204,27 +204,66 @@ func (r *AccountRepository) GetAccountDetails(email string) (models.User, error)
 	return user, nil
 }
 
-// Change the return signature from (bool, error) to (models.User, error)
-func (r *AccountRepository) SaveCollection(user models.User, movieID int, collectionType string) (models.User, error) {
-	var query string
-	if collectionType == "favorites" {
-		query = `INSERT INTO user_favorites (user_id, movie_id) VALUES ($1, $2) ON CONFLICT DO NOTHING`
-	} else if collectionType == "watchlist" {
-		query = `INSERT INTO user_watchlist (user_id, movie_id) VALUES ($1, $2) ON CONFLICT DO NOTHING`
-	} else {
-		return user, errors.New("invalid collection type")
+func (r *AccountRepository) SaveCollection(user models.User, movieID int, collection string) (bool, error) {
+	// Validate inputs
+	if movieID <= 0 {
+		r.logger.Error("SaveCollection failed: invalid movie ID", nil)
+		return false, errors.New("invalid movie ID")
+	}
+	if collection != "favorite" && collection != "watchlist" {
+		r.logger.Error("SaveCollection failed: invalid collection type", nil)
+		return false, errors.New("collection must be 'favorite' or 'watchlist'")
 	}
 
-	_, err := r.db.Exec(query, user.ID, movieID)
+	// Get user ID from email
+	var userID int
+	err := r.db.QueryRow(`
+		SELECT id 
+		FROM users 
+		WHERE email = $1 AND time_deleted IS NULL
+	`, user.Email).Scan(&userID)
+	if err == sql.ErrNoRows {
+		r.logger.Error("User not found", nil)
+		return false, ErrUserNotFound
+	}
 	if err != nil {
-		r.logger.Error("Failed to save to collection", err)
-		return user, err
+		r.logger.Error("Failed to query user ID", err)
+		return false, err
 	}
 
-	// After a successful save, return the user object.
-	// For a more robust implementation, you might refetch the user's collections here.
-	// For now, we return the user object as is.
-	return user, nil
+	// Check if the relationship already exists
+	var exists bool
+	err = r.db.QueryRow(`
+		SELECT EXISTS(
+			SELECT 1 
+			FROM user_movies 
+			WHERE user_id = $1 
+			AND movie_id = $2 
+			AND relation_type = $3
+		)
+	`, userID, movieID, collection).Scan(&exists)
+	if err != nil {
+		r.logger.Error("Failed to check existing collection entry", err)
+		return false, err
+	}
+	if exists {
+		r.logger.Info("Movie already in " + collection + " for user")
+		return true, nil // Return true since the movie is already in the collection
+	}
+
+	// Insert the new relationship
+	query := `
+		INSERT INTO user_movies (user_id, movie_id, relation_type, time_added)
+		VALUES ($1, $2, $3, $4)
+	`
+	_, err = r.db.Exec(query, userID, movieID, collection, time.Now())
+	if err != nil {
+		r.logger.Error("Failed to save movie to "+collection, err)
+		return false, err
+	}
+
+	r.logger.Info("Successfully added movie " + string(movieID) + " to " + collection + " for user")
+	return true, nil
 }
 
 var (

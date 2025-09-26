@@ -268,7 +268,7 @@ footer {
 }
 
 footer p {
-    align-items: left;
+    align-items: flex-start;
     font-size: 0.9rem;
     color: #ffd94ebe;
 }

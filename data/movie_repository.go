@@ -245,7 +245,6 @@ func (r *MovieRepository) fetchMovieRelations(m *models.Movie) error {
 		}
 		m.Keywords = append(m.Keywords, k)
 	}
-
 	return nil
 }
 

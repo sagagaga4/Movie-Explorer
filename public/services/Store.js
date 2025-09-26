@@ -9,7 +9,6 @@ if(localStorage.getItem("jwt")){
     Store.jwt = localStorage.getItem("jwt");
 }
 
-
 const proxiedStore = new Proxy(Store, {
     set: (target, prop, value ) =>  {
         if(prop === "jwt"){

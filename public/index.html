@@ -62,8 +62,8 @@
                 <section id="actions">
                     <dl id="metadata">
                     </dl>
-                    <button>Add to Favorites</button>
-                    <button>Add to Watchlist</button>    
+                    <button id="btnFavorites">Add to Favorites</button>
+                    <button id="btnWatchlist">Add to Watchlist</button>    
                 </section>
             </header>
             <ul id="genres"></ul>
@@ -126,8 +126,14 @@
 
                 <label for="login-password">Password</label>
                 <input id="login-password" type="password" autocomplete="current-password">
+
                 <button>Log In</button>
-                <p>If you don't have an acount, please <a href="/account/register" style="font-weight: bold;text-decoration: underline; color: orange">register</a>.</p>
+                <p>If you don't have an acount, please
+                    <a href="/account/register" 
+                    style="font-weight: bold;text-decoration: underline; 
+                    color: orange">register
+                    </a>.
+                </p>
             </form>
         </section>
     </template>
@@ -139,10 +145,20 @@
             <button onclick="app.Router.go('/account/favorites')">Your Favorites</button>
             <button onclick="app.Router.go('/account/watchlist')">Your Watchlist</button>
         </section>
-    </template>       
+    </template> 
+
+    <template id="template-collection">
+        <section>
+            <ul id="movies-result">
+                <animated-loading data-elements="5"
+                    data-width="150px" data-height="220px">
+                </animated-loading> 
+            </ul>
+        </section>
+    </template>  
 
     <footer>
         <p>(C) MovieSite Sagi's Projects 2025</p>
     </footer>
-</body>
+    </body>
 </html>

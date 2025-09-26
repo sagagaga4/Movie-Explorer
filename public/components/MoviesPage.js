@@ -1,4 +1,4 @@
-import { API } from "../services/API.js";
+import { API }  from "../services/API.js";
 import { MovieItemComponent } from "./MovieItem.js";
 
 export class MoviesPage extends HTMLElement {

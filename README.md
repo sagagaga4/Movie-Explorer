@@ -6,8 +6,6 @@
 <img width="1219" height="594" alt="Screenshot 2025-08-31 at 21 17 57" src="https://github.com/user-attachments/assets/57f6fb9c-f3ee-4ffe-a805-4c91b8db6951" />
 <img width="1440" height="640" alt="Screenshot 2025-09-01 at 3 14 16" src="https://github.com/user-attachments/assets/edfa5e01-a94b-4f7c-af0d-169c3134ba43" />
 
-
-
 ## 🌟 Overview  
 Movies Explorer is a fullstack web application that allows users to browse, search, and filter movies with a modern, smooth user experience.  
 The frontend is built **entirely with Vanilla JavaScript** (no frameworks!) using **Web Components**, **dynamic client-side routing**, and **View Transitions API**.  

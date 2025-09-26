@@ -54,6 +54,7 @@ export const Router = {
             pageElement = document.createElement("h1");
             pageElement.textContent = "Page not found";
         }       
+        
         //Inserting the new page in the UI
         const oldPage = document.querySelector("main").firstElementChild;
         if(oldPage) oldPage.style.viewTransitionName = "old";

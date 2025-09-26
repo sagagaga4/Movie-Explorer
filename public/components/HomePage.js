@@ -1,5 +1,5 @@
 import { MovieItemComponent } from "./MovieItem.js";
-import API from "../services/API.js";
+import { API } from "../services/API.js";
 
 export class HomePage extends HTMLElement {
 

@@ -1,5 +1,5 @@
 # 🎬 Movies Explorer  
-*A high-performance fullstack movie app built with Go & Vanilla JavaScript* 
+*fullstack movie app built with Go & Vanilla JavaScript* 
  
 
 https://github.com/user-attachments/assets/aafb268d-aaa0-40ed-b7c2-3cbb915995de
